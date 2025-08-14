@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>카이로스랩 - AI 기반 신소재 혁신</title>
+
+ <!-- 파비콘 추가 -->
+  <link rel="icon" type="image/png" href="C:\Users\user\Downloads\images\favicon.png.jpg">
+
+  <style>
+    :root{
+      --header-h: 64px;
+      --bg-dark: #0a0f2c;
+      --accent: #00f7ff;
+      --muted: #c0c8d0;
+    }
+    html { scroll-behavior: smooth; }
+    *{ box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", "Roboto", sans-serif;
+      background: var(--bg-dark);
+      color: #e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Header */
+    header {
+      --h: var(--header-h);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(6,10,24,0.85);
+      backdrop-filter: blur(6px);
+      z-index: 300;
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    .logo {
+      display: flex;
+      align-items:center;
+      gap: 12px;
+    }
+    .logo img {
+      height: 40px;
+      display:block;
+      cursor: pointer;
+    }
+    .site-title {
+      color: var(--accent);
+      font-weight:700;
+      font-size: 1.05rem;
+      text-decoration:none;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    nav a{
+      color: #e6eef6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+    nav a:hover{ color: var(--accent); background: rgba(0,255,255,0.02); }
+
+    /* give page top padding so header doesn't cover content */
+    main { padding-top: var(--header-h); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - var(--header-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 36px 20px;
+      overflow: hidden;
+    }
+    /* particles container sits behind content */
+    #particles-js {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 30% 30%, #00264d 0%, #000814 50%, #050a1f 100%);
+      /* subtle slow movement via css for layered depth */
+      background-size: 200% 200%;
+      animation: bgMove 14s ease-in-out infinite alternate;
+      opacity: 0.95;
+    }
+    @keyframes bgMove {
+      0%{ background-position:0% 0%; }
+      100%{ background-position:100% 100%; }
+    }
+    .hero .content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+    }
+    .hero h1 {
+      margin: 0;
+      color: var(--accent);
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 1px;
+      text-transform: none;
+      font-weight: 800;
+      text-shadow: 0 0 10px rgba(0,247,255,0.15);
+      cursor: pointer;
+    }
+    .hero p {
+      margin-top: 14px;
+      color: var(--muted);
+      max-width: 820px;
+      margin-left:auto;
+      margin-right:auto;
+      line-height: 1.6;
+    }
+
+    /* Sections */
+    .section {
+      padding: 72px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section h2 {
+      color: var(--accent);
+      margin: 0 0 14px 0;
+      font-size: 1.6rem;
+    }
+    .section p { color: var(--muted); }
+
+    /* News grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .news-card {
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 14px;
+      transition: transform .25s ease, box-shadow .25s ease;
+      display:flex;
+      flex-direction: column;
+      gap:8px;
+    }
+    .news-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,183,255,0.08);
+    }
+    .news-card a.title {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .news-card .meta { color: #9fb0c0; font-size: .9rem; }
+
+    footer {
+      padding: 28px 20px;
+      background: linear-gradient(180deg, rgba(0,6,20,0.0), #02061a 30%);
+      color: #90a6bd;
+      text-align:center;
+      font-size: .95rem;
+    }
+
+    /* responsive */
+    @media (max-width:600px){
+      nav{ gap:10px; font-size: .95rem; }
+      .hero p{ font-size: .95rem; }
+      .section{ padding: 48px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <!-- Logo (이미지 경로: images/kailos_logo.png) -->
+    <div class="logo">
+      <a href="#home" aria-label="메인으로 이동">
+        <img src="C:\Users\user\OneDrive\사진\Screenshots\kailoslab 2025-08-09 164125.png" alt="Kairos Lab" onerror="this.style.display='none'">
+      </a>
+
+    </div>
+
+    <!-- Navigation -->
+    <nav aria-label="주요메뉴">
+      <a href="#about">About</a>
+      <a href="#solution">Solution</a>
+      <a href="#history">History</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero" aria-label="히어로">
+      <div id="particles-js" aria-hidden="true"></div>
+
+      <div class="content">
+        <h1 id="hero-title">AI 기반 미래소재 혁신</h1>
+        <p>
+          카이로스랩은 AI 기술을 활용해 신소재 연구의 속도와 효율을 혁신적으로 높이며,
+          글로벌 소재 산업의 새로운 기준을 제시합니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" aria-labelledby="about">
+      <h2>About Us</h2>
+      <p>
+        ㈜카이로스랩은 2021년 KAIST·하버드 출신 연구진이 설립한 AI 기반 신소재 발굴 플랫폼 스타트업입니다.
+        자체 개발한 <strong>AIMI</strong> 플랫폼을 통해 신소재 조합을 데이터 기반으로 분석·추천하여
+        실험비용과 개발 시간을 줄입니다.
+      </p>
+    </section>
+
+    <!-- SOLUTION -->
+    <section id="solution" class="section">
+      <h2>Our Solutions</h2>
+      <p>
+        AIMI 플랫폼으로 반도체·배터리·친환경 소재 등 다양한 분야의 소재를 예측하고 최적화합니다.
+      </p>
+    </section>
+
+  <section id="history" class="section">
+    <h2>Our History</h2>
+    <p>2021년: 카이로스랩 설립</p>
+    <p>2024년: 인텔 글로벌 협업 프로그램 선정</p>
+    <p>2025년: Pre-A 투자 유치</p>
+  </section>
+
+    <!-- NEWS -->
+    <section id="news" class="section" aria-labelledby="news">
+      <h2>News Archive</h2>
+      <div class="news-grid">
+        <article class="news-card" role="article">
+          <a class="title" href="https://news.mt.co.kr/mtview.php?no=2025042310153545053" target="_blank" rel="noopener">카이로스랩, AI 기반 신소재 개발 혁신</a>
+          <div class="meta">머니투데이 · 2025-04-23</div>
+          <p class="summary">AIMI 플랫폼을 통해 신소재 조합 추천으로 개발시간/비용 절감.</p>
+        </article>
+
+        <article class="news-card" role="article">
+          <a class="title" href="https://www.edaily.co.kr/news/read?newsId=01643206635744672" target="_blank" rel="noopener">32억 Pre-A 투자 유치</a>
+          <div class="meta">이데일리 · 2025-04-22</div>
+          <p class="summary">SK증권 등으로부터 투자 유치 및 R&D 강화.</p>
+        </article>
+
+        <article class="news-card" role="article">
+          <a class="title" href="https://www.hankyung.com/article/202504218765" target="_blank" rel="noopener">차세대 반도체 소재 예측기술 확보</a>
+          <div class="meta">한국경제 · 2025-04-21</div>
+          <p class="summary">인텔 협업을 통해 반도체 소재 예측 기술 검증.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Email: contact@kailoslab.com</p>
+      <p>Address: 서울시 강남구 테헤란로 ○○</p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 KairosLab. All Rights Reserved.
+  </footer>
+
+  <!-- scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // particles 초기화 (에러 방어)
+    try {
+      particlesJS("particles-js", {
+        "particles": {
+          "number": {"value": 80,"density":{"enable":true,"value_area":800}},
+          "color": {"value":"#00f7ff"},
+          "shape": {"type":"circle"},
+          "opacity": {"value":0.45},
+          "size": {"value":3,"random":true},
+          "line_linked": {"enable":true,"distance":140,"color":"#00f7ff","opacity":0.25,"width":1},
+          "move": {"enable":true,"speed":1.8,"out_mode":"out"}
+        },
+        "interactivity": {
+          "events": {
+            "onhover": {"enable":true,"mode":"repulse"},
+            "onclick": {"enable":true,"mode":"push"}
+          }
+        },
+        "retina_detect": true
+      });
+    } catch(e){
+      console.warn("particles.js 초기화 실패:", e);
+    }
+
+    // hero 제목 클릭 -> news로 스크롤
+    document.getElementById('hero-title').addEventListener('click', function(){
+      document.getElementById('news').scrollIntoView({behavior:'smooth'});
+    });
+
+    // IntersectionObserver를 이용한 섹션 등장 애니메이션 (성능 좋음)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          // 필요 시 unobserve 하여 한 번만 실행
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.15});
+    document.querySelectorAll('.section').forEach(s => io.observe(s));
+  </script>
+</body>
+</html>
+
