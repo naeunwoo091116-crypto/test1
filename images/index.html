@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>카이로스랩 - AI 기반 신소재 혁신</title>
 
- <!-- 파비콘 추가 -->
-  <link rel="icon" type="image/png" href="C:\Users\user\Downloads\images\favicon.png.jpg">
+  <!-- 파비콘 (로컬 절대경로 → 상대경로로 수정) -->
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <style>
     :root{
@@ -74,7 +74,6 @@
     }
     nav a:hover{ color: var(--accent); background: rgba(0,255,255,0.02); }
 
-    /* give page top padding so header doesn't cover content */
     main { padding-top: var(--header-h); }
 
     /* Hero */
@@ -88,13 +87,11 @@
       padding: 36px 20px;
       overflow: hidden;
     }
-    /* particles container sits behind content */
     #particles-js {
       position: absolute;
       inset: 0;
       z-index: 0;
       background: radial-gradient(circle at 30% 30%, #00264d 0%, #000814 50%, #050a1f 100%);
-      /* subtle slow movement via css for layered depth */
       background-size: 200% 200%;
       animation: bgMove 14s ease-in-out infinite alternate;
       opacity: 0.95;
@@ -113,7 +110,6 @@
       color: var(--accent);
       font-size: clamp(28px, 4vw, 44px);
       letter-spacing: 1px;
-      text-transform: none;
       font-weight: 800;
       text-shadow: 0 0 10px rgba(0,247,255,0.15);
       cursor: pointer;
@@ -127,7 +123,6 @@
       line-height: 1.6;
     }
 
-    /* Sections */
     .section {
       padding: 72px 20px;
       max-width: 1100px;
@@ -147,7 +142,6 @@
     }
     .section p { color: var(--muted); }
 
-    /* News grid */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
@@ -182,7 +176,6 @@
       font-size: .95rem;
     }
 
-    /* responsive */
     @media (max-width:600px){
       nav{ gap:10px; font-size: .95rem; }
       .hero p{ font-size: .95rem; }
@@ -194,15 +187,13 @@
 
   <!-- HEADER -->
   <header>
-    <!-- Logo (이미지 경로: images/kailos_logo.png) -->
     <div class="logo">
+      <!-- 로고 (윈도우 절대경로 → 상대경로로 수정) -->
       <a href="#home" aria-label="메인으로 이동">
-        <img src="C:\Users\user\OneDrive\사진\Screenshots\kailoslab 2025-08-09 164125.png" alt="Kairos Lab" onerror="this.style.display='none'">
+        <img src="kailoslab-logo.png" alt="KAILOS LAB" loading="eager">
       </a>
-
     </div>
 
-    <!-- Navigation -->
     <nav aria-label="주요메뉴">
       <a href="#about">About</a>
       <a href="#solution">Solution</a>
@@ -214,7 +205,6 @@
 
   <!-- MAIN -->
   <main>
-    <!-- HERO -->
     <section id="home" class="hero" aria-label="히어로">
       <div id="particles-js" aria-hidden="true"></div>
 
@@ -227,7 +217,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="section" aria-labelledby="about">
       <h2>About Us</h2>
       <p>
@@ -237,7 +226,6 @@
       </p>
     </section>
 
-    <!-- SOLUTION -->
     <section id="solution" class="section">
       <h2>Our Solutions</h2>
       <p>
@@ -245,14 +233,13 @@
       </p>
     </section>
 
-  <section id="history" class="section">
-    <h2>Our History</h2>
-    <p>2021년: 카이로스랩 설립</p>
-    <p>2024년: 인텔 글로벌 협업 프로그램 선정</p>
-    <p>2025년: Pre-A 투자 유치</p>
-  </section>
+    <section id="history" class="section">
+      <h2>Our History</h2>
+      <p>2021년: 카이로스랩 설립</p>
+      <p>2024년: 인텔 글로벌 협업 프로그램 선정</p>
+      <p>2025년: Pre-A 투자 유치</p>
+    </section>
 
-    <!-- NEWS -->
     <section id="news" class="section" aria-labelledby="news">
       <h2>News Archive</h2>
       <div class="news-grid">
@@ -276,7 +263,6 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="section">
       <h2>Contact</h2>
       <p>Email: contact@kailoslab.com</p>
@@ -288,10 +274,8 @@
     &copy; 2025 KairosLab. All Rights Reserved.
   </footer>
 
-  <!-- scripts -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // particles 초기화 (에러 방어)
     try {
       particlesJS("particles-js", {
         "particles": {
@@ -320,12 +304,11 @@
       document.getElementById('news').scrollIntoView({behavior:'smooth'});
     });
 
-    // IntersectionObserver를 이용한 섹션 등장 애니메이션 (성능 좋음)
+    // 섹션 등장 애니메이션
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
-          // 필요 시 unobserve 하여 한 번만 실행
           io.unobserve(entry.target);
         }
       });
@@ -334,4 +317,3 @@
   </script>
 </body>
 </html>
-
